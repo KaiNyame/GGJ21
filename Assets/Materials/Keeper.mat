@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SheepKeeper
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_Name: Keeper
+  m_Shader: {fileID: 4800000, guid: 2c6698a232f01574596ecf63539a92cc, type: 3}
+  m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -34,11 +34,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 45a6c11888d17b340bd484585a1c497d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 93e0bba3ebb345046bda8a8468e973ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -54,6 +54,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -90,6 +94,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AccentLightWeight: 0
+    - _AccentLightWidth: 0.25
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -99,26 +105,56 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DotRotation: 0.125
+    - _DotSize: 0.1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HatchingCross: 1
+    - _HatchingFrequency: 0.5
+    - _HatchingOffsetPerLayer: 0.001
+    - _HatchingRotation: 0.125
+    - _HatchingWidth: 0.5
+    - _HeightMapDepth: 0.25
+    - _HeightMapFidelity: 0.5
+    - _LightColorWeight: 0.5
+    - _LightRampSize: 4
+    - _LightRampSmoothness: 0
+    - _LightRampValues0: 0.10000763
+    - _LightRampValues1: 0.4500038
+    - _LightRampValues2: 0.8
+    - _LightRampValues3: 1
+    - _LightRampValues4: 1
+    - _LightRampValues5: 1
+    - _LightRampValues6: 1
+    - _LightRampValues7: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RenderMode: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StepSmoothness: 0.1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _LightRampColors0: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+    - _LightRampColors1: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _LightRampColors2: {r: 1, g: 1, b: 1, a: 1}
+    - _LightRampColors3: {r: 1, g: 1, b: 1, a: 1}
+    - _LightRampColors4: {r: 1, g: 1, b: 1, a: 1}
+    - _LightRampColors5: {r: 1, g: 1, b: 1, a: 1}
+    - _LightRampColors6: {r: 1, g: 1, b: 1, a: 1}
+    - _LightRampColors7: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

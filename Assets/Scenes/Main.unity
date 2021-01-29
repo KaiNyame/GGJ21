@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &190783415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1264985753}
-  m_PlaneDistance: 10
+  m_PlaneDistance: 3
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -257,11 +257,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData: {fileID: 11400000, guid: 9d1079bca5b6b344f81643590a121859, type: 2}
-  index: 0
+  index: 50
   player: {fileID: 7310332003698348349, guid: 582ddba1b54c55d43887c63234ca7ba9, type: 3}
   sheep: {fileID: 2894406984253006295, guid: 448d730cc9b40b14ba6bf31c82d6d137, type: 3}
   wall: {fileID: 5125285185782468915, guid: 71fd5a5459b199f4f9060324dc546195, type: 3}
-  goal: {fileID: 5826165368166184529, guid: e4bf0c1ee7466e84680991533de337e7, type: 3}
+  goal: {fileID: 3313676287090895764, guid: 14de748931a777f4dade234c154d0152, type: 3}
 --- !u!4 &287931665
 Transform:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.45600003, y: 0}
   m_AnchorMax: {x: 0.55185044, y: 0.3892166}
-  m_AnchoredPosition: {x: -3, y: 64.499985}
+  m_AnchoredPosition: {x: -3, y: 64.5}
   m_SizeDelta: {x: -17, y: -69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570594995
@@ -564,7 +564,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2007
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1508,7 +1508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 192.643, y: 70.423, z: 171.485}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -403.0999, y: -141}
+  m_AnchoredPosition: {x: -403.09985, y: -141}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &919132149233810799
@@ -5378,7 +5378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6591217303397400896, guid: 90aa4b3e36fc2584e86a961d842ae8a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 6591217303397400896, guid: 90aa4b3e36fc2584e86a961d842ae8a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5415,6 +5415,10 @@ PrefabInstance:
     - target: {fileID: 6591217303397400900, guid: 90aa4b3e36fc2584e86a961d842ae8a0, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591217303397400900, guid: 90aa4b3e36fc2584e86a961d842ae8a0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90aa4b3e36fc2584e86a961d842ae8a0, type: 3}
@@ -6991,7 +6995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 15.817, y: 24.404, z: -6.219}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 444.39996, y: 63}
+  m_AnchoredPosition: {x: 444.3999, y: 63}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8780751890810840437
