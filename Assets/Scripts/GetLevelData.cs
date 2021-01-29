@@ -26,6 +26,8 @@ public class GetLevelData: ScriptableObject {
             get => _arr[i];
             set => _arr[i] = value;
         }
+
+        public int Width => _arr.Count;
     }
     [Serializable]
     public class TileSet {
@@ -35,7 +37,7 @@ public class GetLevelData: ScriptableObject {
         public TileSet(){}
         public TileSet(int width, int height) {
             _arr = new List<TileRow>(height);
-            for (int y = 0; y < height; y++) {
+            for (var y = 0; y < height; y++) {
                 _arr.Add(new TileRow(width));
             }
         }
@@ -48,8 +50,11 @@ public class GetLevelData: ScriptableObject {
         public Tile this[int x, int y] {
             get => _arr[y][x];
             set => _arr[y][x] = value;
-
         }
+
+        public int Width => _arr[0].Width;
+        
+        public int Height => _arr.Count;
     }
     
     public enum Tile {
@@ -69,9 +74,9 @@ public class GetLevelData: ScriptableObject {
                 var levelString = ((Match) match).Value;
                 var rows = newLines.Split(levelString);
                 var tileSet = new TileSet(rows[0].Length, rows.Length);
-                for (int y = 0; y < rows.Length; y++) {
+                for (var y = 0; y < rows.Length; y++) {
                     var row = rows[y];
-                    for (int x = 0; x < row.Length; x++) {
+                    for (var x = 0; x < row.Length; x++) {
                         switch (row[x]) {
                             case ' ':
                                 tileSet[x, y] = Tile.Empty;
@@ -103,5 +108,14 @@ public class GetLevelData: ScriptableObject {
                 obtained++;
             }
         }
+
+        var interlaced = new List<TileSet>(levelTiles);
+        for (var i = 0; i < levelCap; i++) {
+            for (var j = 0; j < levels.Length; j++) {
+                interlaced[i * levels.Length + j] = levelTiles[j * levelCap + i];
+            }
+        }
+
+        levelTiles = interlaced;
     }
 }

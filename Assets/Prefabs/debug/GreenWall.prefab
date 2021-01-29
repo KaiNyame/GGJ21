@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 5125285185782468918}
   - component: {fileID: 5125285185782468913}
   - component: {fileID: 5125285185782468912}
-  - component: {fileID: 8070158967979172673}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GreenWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -96,19 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8070158967979172673
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5125285185782468915}
-  serializedVersion: 2
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
