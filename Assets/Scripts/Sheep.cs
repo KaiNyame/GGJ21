@@ -31,7 +31,7 @@ public class Sheep : MonoBehaviour {
     }
     
     public bool Move(Vector3Int dir) {
-        if (Physics.OverlapSphereNonAlloc(transform.position + dir, 0.4f, _colliders) > 0) return false;
+        if (Physics.OverlapSphereNonAlloc(transform.position + dir, 0.4f, _colliders, obstacle.value) > 0) return false;
         StartCoroutine(SheepAnim(dir));
         return true;
     }
