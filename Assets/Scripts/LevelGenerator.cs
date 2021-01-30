@@ -20,6 +20,7 @@ public class LevelGenerator : MonoBehaviour {
             if (obj is Goal g) Destroy(g.gameObject);
             else Destroy(obj);
         }
+        _scene.Clear();
 
         var set = levelData.levelTiles[index];
 

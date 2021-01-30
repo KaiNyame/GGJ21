@@ -6,6 +6,7 @@ public class Sheep : MonoBehaviour {
     public AnimationCurve animP;
     public AnimationCurve animR;
     public AnimationCurve animY;
+    public AudioSource boop;
     public Animator animator;
     public float duration;
     public uint turns;
@@ -14,12 +15,14 @@ public class Sheep : MonoBehaviour {
     public Transform squasher;
     public float flailTransitionSpeed;
     public float headFlailMixSpeed;
+    public int maxSteps = 1;
 
     private readonly Collider[] _colliders = new Collider[1];
     private float _s = -1;
     private float _cS;
     private bool _canMove = true;
     private float seed;
+    private int _step;
     
     private static readonly int Flailing = Animator.StringToHash("Flailing");
     private static readonly int Flail = Animator.StringToHash("Flail");
@@ -55,6 +58,7 @@ public class Sheep : MonoBehaviour {
 
     private IEnumerator SheepAnim(Vector3Int dir) {
         _canMove = false;
+        var high = _s > 0;
         _s = 0;
         
         var t = transform;
@@ -85,6 +89,16 @@ public class Sheep : MonoBehaviour {
 
         _s = 1;
         _canMove = true;
+        if (high) {
+            _step = Mathf.Clamp(_step + 1, 0, maxSteps);
+            boop.pitch = 1f + (0.1f * _step);
+        }
+        else {
+            boop.pitch = 1f;
+            _step = 1;
+        }
+        
+        boop.Play();
         yield return null;
     }
 
