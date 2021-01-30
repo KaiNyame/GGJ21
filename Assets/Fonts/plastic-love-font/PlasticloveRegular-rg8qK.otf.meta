@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b3572fd64c562424dbaef73cf6fbd22b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Plastic Love
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e0e79f1e66041544ba997cf6d583786a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

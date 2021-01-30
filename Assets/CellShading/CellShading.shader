@@ -349,7 +349,7 @@
                 float2 screenPos = input.positionSP.xy / input.positionSP.w;
                 screenPos *= _ScreenParams.xy / min(_ScreenParams.x, _ScreenParams.y);
                 
-                return FinalDotsCalculation(
+                half4 out_col = FinalDotsCalculation(
                     normalWS, viewWS, uv, screenPos,
                     diffuse, spec, smoothness,
                     input.positionWSFF.w, specular, lightTint, emission,
@@ -361,20 +361,25 @@
 				float2 screenPos = input.positionSP.xy / input.positionSP.w;
                 screenPos *= _ScreenParams.xy / min(_ScreenParams.x, _ScreenParams.y);
                 
-                return FinalCrossHatchCalculation(
+                half4 out_col = FinalCrossHatchCalculation(
                     normalWS, viewWS, uv, screenPos, input.positionSP.z,
                     diffuse, spec, smoothness,
                     input.positionWSFF.w, specular, lightTint, emission,
                     TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)
                 );
-				#endif
+				#else
 
-                return FinalBandsCalculation(
+                half4 out_col = FinalBandsCalculation(
                     normalWS, viewWS, uv,
                     diffuse, spec, smoothness,
                     input.positionWSFF.w, specular, lightTint, emission,
                     TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)
                 );
+
+                #endif
+
+                clip(out_col.a - 0.95);
+                return out_col;
             }
             ENDHLSL
         }

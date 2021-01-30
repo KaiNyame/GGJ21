@@ -1,20 +1,29 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
     public GetLevelData levelData;
     public LevelChecker checker;
+    public TreeSpawner trees;
     public int index;
     public GameObject player;
     public GameObject sheep;
     public GameObject wall;
     public Goal goal;
-
+    
     private readonly List<UnityEngine.Object> _scene = new List<UnityEngine.Object>();
 
     [ContextMenu("Generate")]
     public void GenerateLevel() {
+        StartCoroutine(Generator());
+    }
+    
+    public IEnumerator Generator() {
+        yield return trees.ClearTrees();
+        yield return trees.SpawnTrees();
+        
         checker.goals.Clear();
         foreach (var obj in _scene) {
             if (obj is Goal g) Destroy(g.gameObject);
@@ -26,7 +35,8 @@ public class LevelGenerator : MonoBehaviour {
 
         var size = new Vector2Int(set.Width, set.Height);
         var center = size / 2;
-        
+
+        var count = 0;
         for (var x = 0; x < set.Width; x++) {
             for (var y = 0; y < set.Height; y++) {
                 var pos = new Vector3(x - center.x, transform.position.y, y - center.y);
@@ -63,6 +73,14 @@ public class LevelGenerator : MonoBehaviour {
                     var newObj = Instantiate(obj, pos, Quaternion.identity);
                     _scene.Add(newObj);
                     if (newObj is Goal g) checker.goals.Add(g);
+                    count++;
+                }
+                
+                trees.RemoveAt(pos);
+
+                if (count >= 5) {
+                    count = 0;
+                    yield return null;
                 }
             }
         }

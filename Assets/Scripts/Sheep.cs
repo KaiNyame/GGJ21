@@ -15,6 +15,7 @@ public class Sheep : MonoBehaviour {
     public Transform squasher;
     public float flailTransitionSpeed;
     public float headFlailMixSpeed;
+    public float basePitch;
     public int maxSteps = 1;
 
     private readonly Collider[] _colliders = new Collider[1];
@@ -91,10 +92,10 @@ public class Sheep : MonoBehaviour {
         _canMove = true;
         if (high) {
             _step = Mathf.Clamp(_step + 1, 0, maxSteps);
-            boop.pitch = 1f + (0.1f * _step);
+            boop.pitch = basePitch + (0.1f * _step);
         }
         else {
-            boop.pitch = 1f;
+            boop.pitch = basePitch;
             _step = 1;
         }
         

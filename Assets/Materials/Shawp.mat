@@ -20,25 +20,25 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tree 1
+  m_Name: Shawp
   m_Shader: {fileID: 4800000, guid: 2c6698a232f01574596ecf63539a92cc, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _NORMALMAP
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: TransparentCutout
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 1ca3bfa18b22ced40a5369ec68a9f3d1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0b02473eb0e68554682a6fe359e425b3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 86a8de5b24b480d4393a7a20318f4403, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1ca3bfa18b22ced40a5369ec68a9f3d1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -95,14 +95,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AccentLightWeight: 0
-    - _AccentLightWidth: 0.25
-    - _AlphaClip: 1
+    - _AccentLightWidth: 0.225
+    - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0.728
+    - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DotRotation: 0.125
@@ -119,9 +119,9 @@ Material:
     - _HatchingWidth: 0.5
     - _HeightMapDepth: 0.25
     - _HeightMapFidelity: 0.5
-    - _LightColorWeight: 0.4
+    - _LightColorWeight: 0.45
     - _LightRampSize: 4
-    - _LightRampSmoothness: 0.85
+    - _LightRampSmoothness: 0.8
     - _LightRampValues0: 0.10000763
     - _LightRampValues1: 0.4500038
     - _LightRampValues2: 0.8
@@ -145,7 +145,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightRampColors0: {r: 0.75, g: 0.75, b: 0.75, a: 1}

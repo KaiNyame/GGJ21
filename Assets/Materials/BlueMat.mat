@@ -119,9 +119,9 @@ Material:
     - _HatchingWidth: 0.5
     - _HeightMapDepth: 0.25
     - _HeightMapFidelity: 0.5
-    - _LightColorWeight: 0.01
+    - _LightColorWeight: 0.45
     - _LightRampSize: 4
-    - _LightRampSmoothness: 0
+    - _LightRampSmoothness: 0.85
     - _LightRampValues0: 0.1
     - _LightRampValues1: 0.45
     - _LightRampValues2: 0.8

@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class LevelChecker : MonoBehaviour {
     public LevelGenerator generator;
+    public AudioSource portal;
+    public AudioSource complete;
     public List<Goal> goals = new List<Goal>();
     public float delay;
     
     private float _t;
+    private int _completed;
 
     public void Update() {
         if (goals.Count == 0) return;
