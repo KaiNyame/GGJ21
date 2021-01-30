@@ -23,7 +23,13 @@ CC Attribution  Models
 Lovely Animals PACK by JKTimmons https://assetstore.unity.com/packages/3d/characters/animals/lovely-animals-pack-92629#content > sheep
 PILGRIM by TheCharliEZM https://sketchfab.com/3d-models/pilgrim-17a4282292ac431cb59cbdadc8ecd3e3 > Mr. Shepheard 
 Boy warrior by botupo https://sketchfab.com/3d-models/boy-warrior-66707b5e61444da3ad8f1502530db9f8 > Hero Boy
-FREE DOWNLOAD Low poly nature pack by Gostbento https://sketchfab.com/3d-models/free-download-low-poly-nature-pack-cb45d4926fcb4807bc93126b59325cf8 > Bushes / Environment Models
+FREE DOWNLOAD Low poly nature pack by Gostbento https://sketchfab.com/3d-models/free-download-low-poly-nature-pack-
+cb45d4926fcb4807bc93126b59325cf8 > Bushes / Environment Models
+
+Fonts
+Umeboshi font by xxtogaxx http://font.xxenxx.net/umeboshifont.html
+Plastic Font by azkarizki https://www.fontspace.com/plastic-love-font-f49676
+Patrick Hand by Patrick Wagesreiter https://fonts.google.com/specimen/Patrick+Hand
 
 Unity Answers Threads
 https://answers.unity.com/questions/577889/create-level-based-on-xmltxt-file.html
