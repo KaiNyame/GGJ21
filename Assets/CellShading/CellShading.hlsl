@@ -89,6 +89,7 @@ float SmoothStep(float v, float t, float smoothness) {
 float4 CellAlbedo(float2 uv, float4 tint, float3 lightTint, float lightInfluence, TEXTURE2D_PARAM(colorMap, sampler_colorMap)) {
     float4 color = SAMPLE_TEXTURE2D(colorMap, sampler_colorMap, uv);
     color.rgb *= tint.rgb;
+	lightTint = SafeNormalize(lightTint) * 1.73205080757;
     return lerp(color, color * float4(lightTint, color.a), lightInfluence);
 }
 
@@ -244,8 +245,7 @@ half4 FinalBandsCalculation(
 	// specular lighting
 	lighting *= 1.0 + (specular * SmoothStep(spec, saturate(1.0 - smoothness), _StepSmoothness) * 6.0);
 	
-	float li = saturate(length(lighting) / 1.73205080757);
-    float4 finalColor = CellAlbedo(uv, _BaseColor, light, saturate(li * _LightColorWeight), TEXTURE2D_ARGS(colorMap, sampler_colorMap));
+    float4 finalColor = CellAlbedo(uv, _BaseColor, light, _LightColorWeight, TEXTURE2D_ARGS(colorMap, sampler_colorMap));
     finalColor.rgb *= lighting;
 
 	// accent lighting
@@ -293,8 +293,7 @@ half4 FinalDotsCalculation(
 	float accent = 1.0 + (step(dVal, rim * 4.0 - 2.0) * 2.0 * _AccentLightWeight);
 
 	
-	float li = saturate(length(lighting) / 1.73205080757);
-    float4 finalColor = CellAlbedo(uv, _BaseColor, light, saturate(li * _LightColorWeight), TEXTURE2D_ARGS(colorMap, sampler_colorMap));
+    float4 finalColor = CellAlbedo(uv, _BaseColor, light, _LightColorWeight, TEXTURE2D_ARGS(colorMap, sampler_colorMap));
     finalColor.rgb *= lighting;
     finalColor.rgb *= accent;
     finalColor.rgb += emission;
@@ -367,8 +366,7 @@ half4 FinalCrossHatchCalculation(
 		softened = 1;
 	}
 	
-	float li = saturate(length(pattern) / 1.73205080757);
-    float4 finalColor = CellAlbedo(uv, _BaseColor, light, saturate(li * _LightColorWeight), TEXTURE2D_ARGS(colorMap, sampler_colorMap));
+    float4 finalColor = CellAlbedo(uv, _BaseColor, light, _LightColorWeight, TEXTURE2D_ARGS(colorMap, sampler_colorMap));
     finalColor.rgb *= pattern;
     finalColor.rgb += emission;
 

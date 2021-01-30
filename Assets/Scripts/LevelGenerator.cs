@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour {
     public GetLevelData levelData;
+    public LevelChecker checker;
     public int index;
     public GameObject player;
     public GameObject sheep;
     public GameObject wall;
-    public GameObject goal;
+    public Goal goal;
 
-    private readonly List<GameObject> _scene = new List<GameObject>();
+    private readonly List<UnityEngine.Object> _scene = new List<UnityEngine.Object>();
 
     [ContextMenu("Generate")]
     public void GenerateLevel() {
+        checker.goals.Clear();
         foreach (var obj in _scene) {
-            Destroy(obj);
+            if (obj is Goal g) Destroy(g.gameObject);
+            else Destroy(obj);
         }
 
         var set = levelData.levelTiles[index];
@@ -26,7 +29,7 @@ public class LevelGenerator : MonoBehaviour {
         for (var x = 0; x < set.Width; x++) {
             for (var y = 0; y < set.Height; y++) {
                 var pos = new Vector3(x - center.x, transform.position.y, y - center.y);
-                var objs = new List<GameObject>();
+                var objs = new List<UnityEngine.Object>();
                 
                 switch (set[x, y]) {
                     case GetLevelData.Tile.Wall:
@@ -54,8 +57,12 @@ public class LevelGenerator : MonoBehaviour {
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                
-                foreach(var obj in objs) _scene.Add(Instantiate(obj, pos, Quaternion.identity));
+
+                foreach (var obj in objs) {
+                    var newObj = Instantiate(obj, pos, Quaternion.identity);
+                    _scene.Add(newObj);
+                    if (newObj is Goal g) checker.goals.Add(g);
+                }
             }
         }
     }

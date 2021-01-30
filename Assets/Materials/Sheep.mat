@@ -101,7 +101,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -119,9 +119,9 @@ Material:
     - _HatchingWidth: 0.5
     - _HeightMapDepth: 0.25
     - _HeightMapFidelity: 0.5
-    - _LightColorWeight: 0.01
+    - _LightColorWeight: 0.45
     - _LightRampSize: 4
-    - _LightRampSmoothness: 0
+    - _LightRampSmoothness: 0.8
     - _LightRampValues0: 0.10000763
     - _LightRampValues1: 0.4500038
     - _LightRampValues2: 0.8

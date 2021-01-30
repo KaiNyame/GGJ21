@@ -25,7 +25,7 @@ Material:
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
@@ -119,9 +119,9 @@ Material:
     - _HatchingWidth: 0.5
     - _HeightMapDepth: 0.25
     - _HeightMapFidelity: 0.5
-    - _LightColorWeight: 0.5
+    - _LightColorWeight: 0.45
     - _LightRampSize: 4
-    - _LightRampSmoothness: 0
+    - _LightRampSmoothness: 0.8
     - _LightRampValues0: 0.10000763
     - _LightRampValues1: 0.4500038
     - _LightRampValues2: 0.8
@@ -145,7 +145,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightRampColors0: {r: 0.75, g: 0.75, b: 0.75, a: 1}
