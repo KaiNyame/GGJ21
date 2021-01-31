@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "Level Text File")]
 public class GetLevelData: ScriptableObject {
@@ -33,6 +35,9 @@ public class GetLevelData: ScriptableObject {
     public class TileSet {
         [SerializeField]
         private List<TileRow> _arr = new List<TileRow>();
+        public int sheep;
+        public int goals;
+        
         //empty constructer what
         public TileSet(){}
         public TileSet(int width, int height) {
@@ -83,18 +88,23 @@ public class GetLevelData: ScriptableObject {
                                 break;
                             case '.':
                                 tileSet[x, y] = Tile.Goal;
+                                tileSet.goals++;
                                 break;
                             case '*':
                                 tileSet[x, y] = Tile.SheepGoal;
+                                tileSet.sheep++;
+                                tileSet.goals++;
                                 break;
                             case '$':
                                 tileSet[x, y] = Tile.Sheep;
+                                tileSet.sheep++;
                                 break;
                             case '@':
                                 tileSet[x, y] = Tile.Player;
                                 break;
                             case '+':
                                 tileSet[x, y] = Tile.PlayerGoal;
+                                tileSet.goals++;
                                 break;
                             case '#':
                                 tileSet[x, y] = Tile.Wall;
@@ -116,6 +126,65 @@ public class GetLevelData: ScriptableObject {
             }
         }
 
+        levelTiles = new List<TileSet>(interlaced);
+
+        var half = levelTiles.Count / 2;
+        var quarter = levelTiles.Count / 4;
+
+        var total = 0;
+        
+
+        while (total != 100) {
+            var indices = new List<int>();
+            var reserved = new List<TileSet>();
+            
+            var count = 60;
+            foreach (var index in Enumerable.Range(0, half).OrderBy(x => Random.value)) {
+                var set = levelTiles[index];
+                if (set.sheep != set.goals) continue;
+                count -= set.sheep;
+                indices.Add(index);
+                reserved.Add(set);
+                if (count <= 0) break;
+            }
+
+            count = 30;
+            foreach (var index in Enumerable.Range(half, quarter).OrderBy(x => Random.value)) {
+                var set = levelTiles[index];
+                if (set.sheep != set.goals) continue;
+                count -= set.sheep;
+                indices.Add(index);
+                reserved.Add(set);
+                if (count <= 0) break;
+            }
+
+            count = 10;
+            foreach (var index in Enumerable.Range(half + quarter, quarter).OrderBy(x => Random.value)) {
+                var set = levelTiles[index];
+                if (set.sheep != set.goals) continue;
+                count -= set.sheep;
+                indices.Add(index);
+                reserved.Add(set);
+                if (count <= 0) break;
+            }
+            
+            var idx = indices.ToArray();
+            var sets = reserved.ToArray();
+        
+            Array.Sort(idx, sets);
+            interlaced = new List<TileSet>(sets);
+
+            total = 0;
+            foreach (var set in interlaced) {
+                total += set.sheep;
+            }
+        }
+        
+        total = 0;
+        foreach (var set in interlaced) {
+            total += set.sheep;
+        }
+        Debug.Log(total);
         levelTiles = interlaced;
     }
 }

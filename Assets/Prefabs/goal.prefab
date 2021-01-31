@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.23137255, g: 0.43137255, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4882,7 +4882,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.23137255, g: 0.43137255, b: 1, a: 1}
   m_Intensity: 100
   m_Range: 6
   m_SpotAngle: 18.789728
@@ -5155,7 +5155,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 0.23137255, g: 0.43137255, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9927,14 +9927,17 @@ MonoBehaviour:
   - {r: 0.23137254, g: 0.43131006, b: 1, a: 1}
   - {r: 0.5186454, g: 0.84881085, b: 0.990566, a: 1}
   - {r: 0, g: 1, b: 0.50540185, a: 1}
+  - {r: 0.7783019, g: 0.8821969, b: 1, a: 1}
   fogTint:
   - {r: 0.29542494, g: 0.23137254, b: 1, a: 0.4}
   - {r: 0.3661059, g: 0.647829, b: 0.99215686, a: 0.4}
   - {r: 0.19999999, g: 1, b: 0.39999998, a: 0.4}
+  - {r: 0.7764706, g: 0.88235295, b: 1, a: 0.4}
   portalTint:
   - {r: 0.41277468, g: 0.34825563, b: 0.8113208, a: 1}
   - {r: 0.15690637, g: 0.5654197, b: 0.8113208, a: 1}
   - {r: 0.06007475, g: 0.8490566, b: 0.5666434, a: 1}
+  - {r: 0.5454343, g: 0.7473488, b: 0.9716981, a: 1}
   mode: 0
 --- !u!1 &3313676287583789487
 GameObject:
@@ -10158,7 +10161,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 0.4}
+      maxColor: {r: 0.29411766, g: 0.23137255, b: 1, a: 0.4}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

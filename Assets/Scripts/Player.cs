@@ -2,18 +2,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour {
+public class Player : Resettable {
     public LayerMask obstacle;
     public float duration;
     public AnimationCurve walkAnim;
     public AnimationCurve pushAnim;
     public AnimationCurve animR;
     public PlayerInput input;
+    public Animator animator;
+    public float maxSpeed;
     
     private readonly Collider[] _colliders = new Collider[1];
     private bool _moving;
     private InputAction _move;
-    
+    private static readonly int Speed = Animator.StringToHash("Speed");
+
     [ContextMenu("Move Up")]
     private void MoveUp() {
         Move(Vector3Int.forward);
@@ -53,7 +56,7 @@ public class Player : MonoBehaviour {
         else Move(new Vector3Int(0, 0, Mathf.RoundToInt(stick.y)));
     }
     
-    private void Move(Vector3Int dir) {
+    public void Move(Vector3Int dir) {
         if (dir == Vector3Int.zero) return;
         if (_moving) return;
         if (Physics.OverlapSphereNonAlloc(transform.position + dir, 0.4f, _colliders, obstacle.value) > 0) {
@@ -82,8 +85,12 @@ public class Player : MonoBehaviour {
         while (time < duration) {
             time += Time.deltaTime;
 
-            t.position = Vector3.Lerp(sP, eP, anim.Evaluate(time / duration));
+            var pos = t.position;
+            var posE = Vector3.Lerp(sP, eP, anim.Evaluate(time / duration));
+            t.position = posE;
             t.rotation = Quaternion.Lerp(sR, eR, animR.Evaluate(time / duration));
+            
+            animator.SetFloat(Speed, Vector3.Distance(pos, posE) / Time.deltaTime / maxSpeed);
             
             yield return null;
         }

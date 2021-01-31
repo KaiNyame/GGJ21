@@ -378,7 +378,6 @@
 
                 #endif
 
-                clip(out_col.a - 0.95);
                 return out_col;
             }
             ENDHLSL

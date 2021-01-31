@@ -2,17 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour {
     public GetLevelData levelData;
     public LevelChecker checker;
     public TreeSpawner trees;
     public int index;
-    public GameObject player;
+    public Player player;
     public GameObject sheep;
+    public GameObject shawp;
     public GameObject wall;
     public Goal goal;
-    
+
     private readonly List<UnityEngine.Object> _scene = new List<UnityEngine.Object>();
 
     [ContextMenu("Generate")]
@@ -27,6 +29,7 @@ public class LevelGenerator : MonoBehaviour {
         checker.goals.Clear();
         foreach (var obj in _scene) {
             if (obj is Goal g) Destroy(g.gameObject);
+            else if (obj is Player p) Destroy(p.gameObject);
             else Destroy(obj);
         }
         _scene.Clear();
@@ -50,7 +53,8 @@ public class LevelGenerator : MonoBehaviour {
                         objs.Add(player);
                         break;
                     case GetLevelData.Tile.Sheep:
-                        objs.Add(sheep);
+                        if (Random.value < Mathf.Lerp(0.005f, 0.1f, (float) LevelChecker.sheepCount / 100)) objs.Add(shawp);
+                        else objs.Add(sheep);
                         break;
                     case GetLevelData.Tile.Goal:
                         objs.Add(goal);
@@ -70,9 +74,10 @@ public class LevelGenerator : MonoBehaviour {
                 }
 
                 foreach (var obj in objs) {
-                    var newObj = Instantiate(obj, pos, Quaternion.identity);
+                    var newObj = Instantiate(obj, pos, Quaternion.identity, transform);
                     _scene.Add(newObj);
                     if (newObj is Goal g) checker.goals.Add(g);
+                    else if (newObj is Player p) checker.player = p;
                     count++;
                 }
                 
