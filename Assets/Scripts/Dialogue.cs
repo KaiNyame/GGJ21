@@ -39,7 +39,6 @@ public class Dialogue : MonoBehaviour {
     private bool _process = true;
 
     public void Awake() {
-        useEng = useEnglish;
         _dialogue = useEng ? eng : jpn;
         text.font = useEng ? engFont : jpnFont;
         UpdateDialogue();

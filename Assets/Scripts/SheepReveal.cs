@@ -17,9 +17,9 @@ public class SheepReveal : MonoBehaviour {
         if (!gameObject.activeSelf) return;
         
         if ((player.value & (1 << other.gameObject.layer)) == 0) return;
-        baah.Play();
-        poof.Play();
         gameObject.SetActive(false);
         sheep.SetActive(true);
+        baah.Play();
+        poof.Play();
     }
 }

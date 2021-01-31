@@ -16,6 +16,7 @@ public class Player : Resettable {
     private bool _moving;
     private InputAction _move;
     private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int Pushing = Animator.StringToHash("Pushing");
 
     [ContextMenu("Move Up")]
     private void MoveUp() {
@@ -61,9 +62,13 @@ public class Player : Resettable {
         if (_moving) return;
         if (Physics.OverlapSphereNonAlloc(transform.position + dir, 0.4f, _colliders, obstacle.value) > 0) {
             if (!_colliders[0].TryGetComponent<Sheep>(out var s) || !s.Move(dir)) return;
+            animator.SetFloat(Pushing, 1.0f);
             StartCoroutine(MoveAnim(dir, pushAnim));
         }
-        else StartCoroutine(MoveAnim(dir, walkAnim));
+        else {
+            animator.SetFloat(Pushing, 0.0f);
+            StartCoroutine(MoveAnim(dir, walkAnim));
+        }
     }
 
     private IEnumerator MoveAnim(Vector3Int dir, AnimationCurve anim) {
