@@ -21,18 +21,27 @@ public class LevelGenerator : MonoBehaviour {
     public void GenerateLevel() {
         StartCoroutine(Generator());
     }
-    
-    public IEnumerator Generator() {
-        yield return trees.ClearTrees();
-        yield return trees.SpawnTrees();
-        
-        checker.goals.Clear();
+
+    public IEnumerator ClearDungeon() {
+        var count = 0;
         foreach (var obj in _scene) {
             if (obj is Goal g) Destroy(g.gameObject);
             else if (obj is Player p) Destroy(p.gameObject);
             else Destroy(obj);
+            count++;
+            if (count < 10) continue;
+            count = 0;
+            yield return null;
         }
         _scene.Clear();
+    }
+    
+    public IEnumerator Generator() {
+        yield return trees.ClearTrees();
+        yield return trees.SpawnTrees();
+        checker.goals.Clear();
+        yield return ClearDungeon();
+        
 
         var set = levelData.levelTiles[index];
 

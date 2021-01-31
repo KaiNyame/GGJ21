@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelChecker : MonoBehaviour {
-    public static int sheepCount;
+    public static int sheepCount = 0;
     public LevelGenerator generator;
     public Player player;
     public AudioSource portal;
@@ -16,6 +17,16 @@ public class LevelChecker : MonoBehaviour {
     public float yeetDuration;
     public float angularSpeed;
     public float speed;
+    public Dialogue dialogue;
+    public Canvas gameplay;
+    public GameObject gameplayViz;
+    
+    [Multiline]
+    public string[] endEng;
+    [Multiline]
+    public string[] endJpn;
+
+    public Dialogue.DialogueState[] endStates;
 
     private float _t;
     private int _completed;
@@ -28,18 +39,23 @@ public class LevelChecker : MonoBehaviour {
 
         if (!done) return;
         
-        player.enabled = false;
         foreach (var goal in goals) goal.mode = 2;
 
         if (_t < delay) {
             _t += Time.deltaTime;
             return;
         }
+        player.enabled = false;
+        fade.raycastTarget = true;
 
         sheepCount += goals.Count;
         _t = 0;
         goals.Clear();
-        StartCoroutine(CompleteLevel());
+
+        if (sheepCount == 100) {
+            StartCoroutine(ToEndScene());
+        }
+        else StartCoroutine(CompleteLevel());
     }
 
     public IEnumerator CompleteLevel() {
@@ -127,5 +143,40 @@ public class LevelChecker : MonoBehaviour {
         }
         
         fade.color = Color.clear;
+        fade.raycastTarget = false;
+    }
+
+    public IEnumerator ToEndScene() {
+        var time = 0f;
+
+        while (time < fadeDuration) {
+            fade.color = Color.Lerp(Color.clear, Color.black, time / fadeDuration);
+            
+            yield return null;
+            time += Time.deltaTime;
+        }
+        
+        fade.color = Color.black;
+        
+        yield return generator.trees.ClearTrees();
+        yield return generator.ClearDungeon();
+        dialogue.SetDialogue(endEng, endJpn, endStates);
+        dialogue.ending = true;
+        dialogue.gameObject.SetActive(true);
+        gameplayViz.SetActive(false);
+
+        time = 0f;
+
+        while (time < fadeDuration) {
+            fade.color = Color.Lerp(Color.black, Color.clear, time / fadeDuration);
+            
+            yield return null;
+            time += Time.deltaTime;
+        }
+        
+        fade.color = Color.clear;
+        gameplay.gameObject.SetActive(false);
+        gameplayViz.SetActive(true);
+        fade.raycastTarget = false;
     }
 }

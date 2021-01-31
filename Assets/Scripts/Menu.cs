@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ public class Menu : MonoBehaviour {
     }
     
     private IEnumerator NextScene(Canvas next) {
+        fade.raycastTarget = true;
         _transitioning = true;
         var time = 0f;
 
@@ -45,5 +47,6 @@ public class Menu : MonoBehaviour {
         _transitioning = false;
         gameObject.SetActive(false);
         visibility.SetActive(true);
+        fade.raycastTarget = false;
     }
 }

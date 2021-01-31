@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Sound;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour {
@@ -33,13 +32,21 @@ public class Dialogue : MonoBehaviour {
     public float fadeDuration;
     public bool useEnglish;
     public LevelGenerator generator;
+    public string track;
+    public TrackList tracks;
+    public Canvas gameplay;
+    public Canvas credits;
+    public bool ending;
+    
 
     private string[] _dialogue;
-    private int _current;
+    private DialogueState[] _states;
+    public int current;
     private bool _process = true;
 
     public void Awake() {
         _dialogue = useEng ? eng : jpn;
+        _states = states;
         text.font = useEng ? engFont : jpnFont;
         UpdateDialogue();
         input.onActionTriggered += OnAction;
@@ -49,8 +56,8 @@ public class Dialogue : MonoBehaviour {
         if (!context.performed || !_process) return;
         switch (context.action.name) {
             case "Next":
-                _current++;
-                if (_current >= _dialogue.Length) {
+                current++;
+                if (current >= _dialogue.Length) {
                     StartCoroutine(ToGame());
                 }
                 else UpdateDialogue();
@@ -63,9 +70,9 @@ public class Dialogue : MonoBehaviour {
         }
     }
 
-    private void UpdateDialogue() {
-        text.text = _dialogue[_current];
-        if (states[_current].boyTalking) {
+    public void UpdateDialogue() {
+        text.text = _dialogue[current];
+        if (_states[current].boyTalking) {
             boyTriangle.enabled = true;
             manTriangle.enabled = false;
         }
@@ -75,7 +82,16 @@ public class Dialogue : MonoBehaviour {
         }
     }
 
+    public void SetDialogue(string[] newEng, string[] newJpn, DialogueState[] newStates) {
+        _dialogue = useEng ? newEng : newJpn;
+        _states = newStates;
+        current = 0;
+        UpdateDialogue();
+    }
+
     private IEnumerator ToGame() {
+        fade.raycastTarget = true;
+        if (!ending) BackgroundMusic.Mute();
         _process = false;
         input.enabled = false;
         var time = 0f;
@@ -88,11 +104,15 @@ public class Dialogue : MonoBehaviour {
         }
         
         fade.color = Color.black;
+        gameplay.gameObject.SetActive(true);
         visibility.SetActive(false);
-        
-        generator.index += 1;
-        yield return generator.Generator();
-        
+
+        if (ending) credits.gameObject.SetActive(true);
+        else {
+            generator.index += 1;
+            yield return generator.Generator();
+        }
+
         time = 0f;
 
         while (time < fadeDuration) {
@@ -103,6 +123,23 @@ public class Dialogue : MonoBehaviour {
         }
         
         fade.color = Color.clear;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        visibility.SetActive(true);
+
+        if (!ending) {
+            BackgroundMusic.ClearQueue();
+            BackgroundMusic.UnMute();
+            tracks.QueueTrack(track);
+        }
+        else {
+            SetDialogue(eng, jpn, states);
+            ending = false;
+            generator.index = 0;
+            LevelChecker.sheepCount = 0;
+        }
+
+        _process = true;
+        input.enabled = true;
+        fade.raycastTarget = false;
     }
 }
