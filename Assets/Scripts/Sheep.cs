@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Sheep : MonoBehaviour {
+public class Sheep : Resettable {
     public LayerMask obstacle;
     public AnimationCurve animP;
     public AnimationCurve animR;
@@ -22,7 +22,7 @@ public class Sheep : MonoBehaviour {
     private float _s = -1;
     private float _cS;
     private bool _canMove = true;
-    private float seed;
+    private float _seed;
     private int _step;
     
     private static readonly int Flailing = Animator.StringToHash("Flailing");
@@ -103,8 +103,8 @@ public class Sheep : MonoBehaviour {
         yield return null;
     }
 
-    public void Start() {
-        seed = Random.value;
+    public void Awake() {
+        _seed = Random.value;
     }
 
     public void LateUpdate() {
@@ -132,7 +132,7 @@ public class Sheep : MonoBehaviour {
         animator.SetBool(Flailing, flailing);
         var delta = Time.deltaTime * flailTransitionSpeed;
         if (flailing) {
-            var bT = Mathf.Lerp(0.2f, 0.4f, Mathf.PerlinNoise(Time.time * headFlailMixSpeed, seed));
+            var bT = Mathf.Lerp(0.2f, 0.4f, Mathf.PerlinNoise(Time.time * headFlailMixSpeed, _seed));
             animator.SetFloat(Flail, Mathf.Lerp(animator.GetFloat(Flail), bT, delta));
             
             if (Vector3.Angle(transform.forward, Vector3.down) > 5) animator.SetFloat(HeadFlail, Mathf.Lerp(animator.GetFloat(HeadFlail), 1, delta));

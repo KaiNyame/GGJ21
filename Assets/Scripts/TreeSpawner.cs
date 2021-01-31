@@ -48,7 +48,7 @@ public class TreeSpawner : MonoBehaviour {
                 for (var i = r.Count - 1; i >= 0; i--) {
                     var point = r[i].info;
                     var dist = Vector2.Distance(point, loc);
-                    if (dist > point.z + maxSize * 1.5f) continue;
+                    if (dist > point.z + maxSize) continue;
                     Destroy(r[i].tree.gameObject);
                     r.RemoveAt(i);
                 }
@@ -80,7 +80,7 @@ public class TreeSpawner : MonoBehaviour {
         while (Application.isPlaying) {
             var spawned = false;
             
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 15; i++) {
                 var location = Random.insideUnitCircle * spawnRadius;
                 var key = new Vector2Int(
                     Mathf.FloorToInt(Mathf.FloorToInt(location.x / maxSize) * maxSize),
