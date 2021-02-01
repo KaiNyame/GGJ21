@@ -270,7 +270,7 @@
                     "path": "<Pointer>/press",
                     "interactions": "Hold(duration=0.5)",
                     "processors": "",
-                    "groups": "Touch;Keyboard&Mouse",
+                    "groups": "",
                     "action": "End",
                     "isComposite": false,
                     "isPartOfComposite": false
