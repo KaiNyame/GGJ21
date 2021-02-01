@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,8 @@ public class Player : Resettable {
     private readonly Collider[] _colliders = new Collider[1];
     private bool _moving;
     private InputAction _move;
+    private InputAction _position;
+    private InputAction _contact;
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Pushing = Animator.StringToHash("Pushing");
 
@@ -42,23 +45,24 @@ public class Player : Resettable {
     }
 
     public void Awake() {
-        _move = input.actions.FindActionMap("Player").FindAction("Move");
-        input.onActionTriggered += OnAction;
-    }
+        var playerMap = input.actions.FindActionMap("Player");
+        _move = playerMap.FindAction("Move");
+        _position = playerMap.FindAction("Position");
+        _contact = playerMap.FindAction("Contact");
 
-    private void OnAction(InputAction.CallbackContext context) {
-        if (!enabled) return;
-        if (!context.action.name.Equals("Contact")) return;
-        
-        if (context.started) {
-            start = context.ReadValue<Vector2>();
+        _contact.started += (ctx) => {
+            if (!enabled) return;
+            start = _position.ReadValue<Vector2>();
             contactTime = Time.unscaledTime;
-        }
-        else if (context.canceled && Time.unscaledTime - contactTime < 0.45f) {
-            var swipe = (context.ReadValue<Vector2>() - start).normalized;
-            if (Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) Move(new Vector3Int(Mathf.RoundToInt(swipe.x), 0, 0));
-            else Move(new Vector3Int(0, 0, Mathf.RoundToInt(swipe.y)));
-        }
+        };
+
+        _contact.canceled += (ctx) => {
+            if (!enabled) return;
+            var swipe = _position.ReadValue<Vector2>() - start;
+            if (swipe.magnitude < (Mathf.Min(Screen.width, Screen.height) / 10f)) return;
+            if (Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) Move(new Vector3Int(Math.Sign(swipe.x), 0, 0));
+            else Move(new Vector3Int(0, 0, Math.Sign(swipe.y)));
+        };
     }
 
     public void Update() {
