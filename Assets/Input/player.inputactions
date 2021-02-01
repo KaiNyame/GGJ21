@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Contact",
+                    "type": "Button",
+                    "id": "44b4c2de-2a2f-4476-8574-411df0d03555",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -207,6 +215,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83d60c19-2bc3-412b-93af-7eb0a296d2e6",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Contact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -519,22 +538,22 @@
                 },
                 {
                     "name": "",
-                    "id": "171247ae-33f5-40ae-99af-eca131fcda3a",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "id": "b449705b-b622-4c0c-bd94-928d839c734f",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Keyboard&Mouse",
                     "action": "Next",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b449705b-b622-4c0c-bd94-928d839c734f",
-                    "path": "<Keyboard>/space",
+                    "id": "32421981-92c9-41a1-817a-9f3ccb9cb71f",
+                    "path": "<Pointer>/press",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Touch;Keyboard&Mouse",
                     "action": "Next",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -563,11 +582,11 @@
                 },
                 {
                     "name": "",
-                    "id": "659d0cc4-f433-4cba-b397-599100adb28d",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "MultiTap",
+                    "id": "2e8d1cc2-6524-4fe8-9181-e360368ee404",
+                    "path": "<Pointer>/press",
+                    "interactions": "Hold(duration=0.5)",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Touch;Keyboard&Mouse",
                     "action": "End",
                     "isComposite": false,
                     "isPartOfComposite": false

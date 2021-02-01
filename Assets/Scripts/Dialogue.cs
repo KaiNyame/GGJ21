@@ -104,11 +104,11 @@ public class Dialogue : MonoBehaviour {
         }
         
         fade.color = Color.black;
-        gameplay.gameObject.SetActive(true);
+        
         visibility.SetActive(false);
-
         if (ending) credits.gameObject.SetActive(true);
         else {
+            gameplay.gameObject.SetActive(true);
             generator.index += 1;
             yield return generator.Generator();
         }

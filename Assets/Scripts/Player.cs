@@ -18,6 +18,9 @@ public class Player : Resettable {
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Pushing = Animator.StringToHash("Pushing");
 
+    private float contactTime;
+    private Vector2 start;
+
     [ContextMenu("Move Up")]
     private void MoveUp() {
         Move(Vector3Int.forward);
@@ -40,12 +43,22 @@ public class Player : Resettable {
 
     public void Awake() {
         _move = input.actions.FindActionMap("Player").FindAction("Move");
-            
         input.onActionTriggered += OnAction;
     }
 
     private void OnAction(InputAction.CallbackContext context) {
+        if (!enabled) return;
+        if (!context.action.name.Equals("Contact")) return;
         
+        if (context.started) {
+            start = context.ReadValue<Vector2>();
+            contactTime = Time.unscaledTime;
+        }
+        else if (context.canceled && Time.unscaledTime - contactTime < 0.45f) {
+            var swipe = (context.ReadValue<Vector2>() - start).normalized;
+            if (Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) Move(new Vector3Int(Mathf.RoundToInt(swipe.x), 0, 0));
+            else Move(new Vector3Int(0, 0, Mathf.RoundToInt(swipe.y)));
+        }
     }
 
     public void Update() {

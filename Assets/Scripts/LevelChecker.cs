@@ -52,7 +52,7 @@ public class LevelChecker : MonoBehaviour {
         _t = 0;
         goals.Clear();
 
-        if (sheepCount == 100) {
+        if (sheepCount >= 100) {
             StartCoroutine(ToEndScene());
         }
         else StartCoroutine(CompleteLevel());
