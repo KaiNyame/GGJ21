@@ -21,8 +21,10 @@ public class Player : Resettable {
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Pushing = Animator.StringToHash("Pushing");
 
+    private bool _touchStarted;
     private float contactTime;
     private Vector2 start;
+    private Vector2 swipe;
 
     [ContextMenu("Move Up")]
     private void MoveUp() {
@@ -48,30 +50,35 @@ public class Player : Resettable {
         var playerMap = input.actions.FindActionMap("Player");
         _move = playerMap.FindAction("Move");
         _position = playerMap.FindAction("Position");
-        _contact = playerMap.FindAction("Contact");
-
-        _contact.started += (ctx) => {
-            if (!enabled) return;
-            start = _position.ReadValue<Vector2>();
-            contactTime = Time.unscaledTime;
-        };
-
-        _contact.canceled += (ctx) => {
-            if (!enabled) return;
-            var swipe = _position.ReadValue<Vector2>() - start;
-            if (swipe.magnitude < (Mathf.Min(Screen.width, Screen.height) / 10f)) return;
-            if (Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) Move(new Vector3Int(Math.Sign(swipe.x), 0, 0));
-            else Move(new Vector3Int(0, 0, Math.Sign(swipe.y)));
-        };
     }
 
     public void Update() {
+        TouchUpdate();
+        
         var stick = _move.ReadValue<Vector2>() * 1.5f;
         stick.x = Mathf.Clamp(stick.x, -1, 1);
         stick.y = Mathf.Clamp(stick.y, -1, 1);
         
         if (Mathf.Abs(stick.x) > Mathf.Abs(stick.y)) Move(new Vector3Int(Mathf.RoundToInt(stick.x), 0, 0));
         else Move(new Vector3Int(0, 0, Mathf.RoundToInt(stick.y)));
+    }
+
+    private void TouchUpdate() {
+        if (Input.touchCount > 0) {
+            if (!_touchStarted) {
+                start = Input.GetTouch(0).position;
+                _touchStarted = true;
+            }
+            contactTime += Time.deltaTime;
+            swipe = Input.GetTouch(0).position - start;
+        }
+        else if (_touchStarted) {
+            _touchStarted = false;
+            contactTime = 0;
+            if (swipe.magnitude < (Mathf.Min(Screen.width, Screen.height) / 10f)) return;
+            if (Mathf.Abs(swipe.x) > Mathf.Abs(swipe.y)) Move(new Vector3Int(Math.Sign(swipe.x), 0, 0));
+            else Move(new Vector3Int(0, 0, Math.Sign(swipe.y)));
+        }
     }
     
     public void Move(Vector3Int dir) {
