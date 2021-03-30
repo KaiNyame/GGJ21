@@ -5,8 +5,8 @@ public class Tweet : MonoBehaviour {
     public TextAsset contentJpn;
 
 #if !UNITY_EDITOR && UNITY_WEBGL
-        [System.Runtime.InteropServices.DllImport("__Internal")]
-        static extern string TweetFromUnity(string rawMessage);
+    [System.Runtime.InteropServices.DllImport("__Internal")]
+    static extern string TweetFromUnity(string rawMessage);
 #endif
 
     public void Share() {
